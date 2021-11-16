@@ -54,8 +54,7 @@ export class UpdateScheduleTimingsComponent implements OnInit {
     console.log(this.ids)
     this.scheduleService.updateScheduleById(this.ids,frmAdd).subscribe(rs=> {
         if (rs.status === 'success'){
-          console.log(rs.scheduleTiming)
-       //   this.successAdd.emit(rs.scheduleTiming);
+          this.successAdd.emit(rs.scheduleTiming);
           this.closeModal();
         }
       }

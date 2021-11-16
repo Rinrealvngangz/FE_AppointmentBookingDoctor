@@ -15,6 +15,8 @@ import {AddSpecialityComponent} from "../../specialities/add-speciality/add-spec
 import {AddScheduleTimingsComponent} from "../add-schedule-timings/add-schedule-timings.component";
 import {UpdateScheduleTimingsComponent} from "../update-schedule-timings/update-schedule-timings.component";
 import {ScheduleTimingsService} from "../../../../services/schedule-timings.service";
+import {from, of} from "rxjs";
+import {filter, map} from "rxjs/operators";
 
 @Component({
   selector: 'app-schedule-slot',
@@ -74,8 +76,17 @@ export class ScheduleSlotComponent implements OnInit,AfterViewInit ,OnChanges,On
 
   }
   eventFromModalEdit($event:any){
-   //this.timings.push($event);
-   // this.timings = [...this.timings]
+    console.log($event)
+    from(this.timings).pipe(
+     filter(val => val.scheduleTimingId === $event.scheduleTimingId),
+      map(data => {
+        return {
+            ...data,
+          atBegin:$event.atBegin,
+          atEnd:$event.atEnd
+        }
+      } )
+    ).subscribe(rs => this.timings[0] = rs)
   }
 
 }
