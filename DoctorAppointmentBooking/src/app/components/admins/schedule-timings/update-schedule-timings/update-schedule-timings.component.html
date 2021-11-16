@@ -1,0 +1,74 @@
+<div #modalchild class="modal fade custom-modal" [ngClass]="isOpenModal ? 'show' : ''" id="add_time_slot"
+     style="padding-right: 12px;" [ngStyle]="{'display': isOpenModal ? 'block': 'none'}">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Time Slots</h5>
+        <button type="button" (click)="closeModal()"  class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formAdd" (ngSubmit)="addSchedule(formAdd.value)">
+          <div class="hours-info">
+            <div class="row form-row hours-cont">
+              <div class="col-12 col-md-10">
+                <app-begin-end-timings>
+                  <select beginTime formControlName="startBegin"   class="form-control">
+                    <option [ngValue]="null">-</option>
+                    <option [ngValue]="'7:00'">7.00 am</option>
+                    <option [ngValue]="'7:30'">7.30 am</option>
+                    <option [ngValue]="'8:00'">8.00 am</option>
+                    <option [ngValue]="'8:30'">8.30 am</option>
+                    <option [ngValue]="'9:00'">9.00 am</option>
+                    <option [ngValue]="'9:30'">9.30 am</option>
+                    <option [ngValue]="'10:30'">10.30 am</option>
+                    <option [ngValue]="'10:00'">10.00 am</option>
+                    <option [ngValue]="'11:00'">11.00 am</option>
+                    <option [ngValue]="'1:00'">1.00 am</option>
+                    <option [ngValue]="'1:30'">1.30 am</option>
+                    <option [ngValue]="'2:00'">2.00 am</option>
+                    <option [ngValue]="'2:30'">2.30 am</option>
+                    <option [ngValue]="'3:00'">3.00 am</option>
+                    <option [ngValue]="'3:30'">3.30 am</option>
+                    <option [ngValue]="'4:00'">4.00 am</option>
+                    <option [ngValue]="'4:30'">4.30 am</option>
+                    <option [ngValue]="'5:00'">5.00 am</option>
+                    <option [ngValue]="'5:30'">5.30 am</option>
+                    <option [ngValue]="'6:00'">6.00 am</option>
+                  </select>
+                  <select endTime formControlName="endTime"  class="form-control">
+                    <option [ngValue]="null">-</option>
+                    <option [ngValue]="'7:30'">7.30 am</option>
+                    <option [ngValue]="'8:00'">8.00 am</option>
+                    <option [ngValue]="'8:30'">8.30 am</option>
+                    <option [ngValue]="'9:00'">9.00 am</option>
+                    <option [ngValue]="'9:30'">9.30 am</option>
+                    <option [ngValue]="'10:30'">10.30 am</option>
+                    <option [ngValue]="'10:00'">10.00 am</option>
+                    <option [ngValue]="'11:00'">11.00 am</option>
+                    <option [ngValue]="'1:00'">1.00 am</option>
+                    <option [ngValue]="'1:30'">1.30 am</option>
+                    <option [ngValue]="'2:00'">2.00 am</option>
+                    <option [ngValue]="'2:30'">2.30 am</option>
+                    <option [ngValue]="'3:00'">3.00 am</option>
+                    <option [ngValue]="'3:30'">3.30 am</option>
+                    <option [ngValue]="'4:00'">4.00 am</option>
+                    <option [ngValue]="'4:30'">4.30 am</option>
+                    <option [ngValue]="'5:00'">5.00 am</option>
+                    <option [ngValue]="'5:30'">5.30 am</option>
+                    <option [ngValue]="'6:00'">6.00 am</option>
+                    <option [ngValue]="'6:30'">6.30 am</option>
+                  </select>
+                </app-begin-end-timings>
+              </div>
+            </div>
+          </div>
+          <div class="submit-section text-center">
+            <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

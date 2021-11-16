@@ -28,6 +28,7 @@ import { ScheduleSlotComponent } from './schedule-timings/schedule-slot/schedule
 import {MyTimePipe} from "../../common/my-time-pipe";
 import { AddScheduleTimingsComponent } from './schedule-timings/add-schedule-timings/add-schedule-timings.component';
 import { BeginEndTimingsComponent } from './schedule-timings/begin-end-timings/begin-end-timings.component';
+import { UpdateScheduleTimingsComponent } from './schedule-timings/update-schedule-timings/update-schedule-timings.component';
 
 const routes: Routes =[
 
@@ -126,7 +127,8 @@ const routes: Routes =[
     ScheduleSlotComponent,
     MyTimePipe,
     AddScheduleTimingsComponent,
-    BeginEndTimingsComponent
+    BeginEndTimingsComponent,
+    UpdateScheduleTimingsComponent
   ],
   imports: [
     CommonModule,
@@ -150,7 +152,8 @@ const routes: Routes =[
     ViewAdminComponent,
     PasswordDirective,
     AddAdminComponent,
-    ScheduleTimingsComponent
+    ScheduleTimingsComponent,
+    UpdateScheduleTimingsComponent
   ],
 })
 export class AdminsModule { }

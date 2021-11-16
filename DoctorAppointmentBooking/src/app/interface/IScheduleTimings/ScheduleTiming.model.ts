@@ -1,7 +1,8 @@
 export  interface  ScheduleTimingModel{
-    scheduleTimingsID:string,
+   scheduleTimingId:string,
     bookDate:Date,
     atBegin:string,
     atEnd:string,
-    status:number
+    status:number,
+  doctorId:string
 }

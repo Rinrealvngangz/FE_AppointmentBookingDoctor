@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-begin-end-timings',
@@ -6,11 +7,11 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./begin-end-timings.component.css']
 })
 export class BeginEndTimingsComponent implements OnInit {
-@Input()BeginTimings:string =''
-  @Input()EndTimings:string=''
+
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

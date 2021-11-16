@@ -5,6 +5,7 @@ import {ScheduleTimingModels} from "../interface/IScheduleTimings/ScheduleTiming
 import {ScheduleTimingDoctorModel} from "../interface/IScheduleTimings/ScheduleTimingDoctor.model";
 import {map} from "rxjs/operators";
 import {ScheduleTimingModel} from "../interface/IScheduleTimings/ScheduleTiming.model";
+import {IMessage} from "../interface/Imessage.model";
 
 
 @Injectable({
@@ -20,5 +21,15 @@ export class ScheduleTimingsService {
   getById(id:any):Observable<ScheduleTimingModels>{
     return this.http.get<ScheduleTimingModels>(`api/v1/schedule/${id}`)
   }
+  addTimings(id:any,body:any):Observable<IMessage>{
+            return this.http.post<IMessage>(`api/v1/schedule/${id}`,body)
+  }
 
+  getScheduleById(id:any,idSchedule:any):Observable<any>{
+    return this.http.get<any>(`api/v1/schedule/${id}/get/${idSchedule}`)
+  }
+
+  updateScheduleById(id:any,body:any):Observable<IMessage>{
+    return this.http.put<IMessage>(`api/v1/schedule/${id}`,body)
+  }
 }

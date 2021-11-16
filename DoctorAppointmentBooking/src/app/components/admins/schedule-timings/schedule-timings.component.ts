@@ -18,13 +18,15 @@ export class ScheduleTimingsComponent implements OnInit {
   slotName:string =''
   timings:ScheduleTimingModel[] =[]
   subResult!:ScheduleTimingModels
-
+  arrDayWeek:string[]=[]
+  nameDay!:string
   constructor(private  cdr:ChangeDetectorRef,
               private scheduleService:ScheduleTimingsService,
               private authen:AuthService) { }
 
   ngOnInit(): void {
     this.getById();
+  this.arrDayWeek =  this.dates(new Date(Date.now()))
   }
 
   getById(){
@@ -34,35 +36,58 @@ export class ScheduleTimingsComponent implements OnInit {
   }
 
   activeSlot($event:any){
-    console.log(this.subResult)
-   this.slotName =  $event.id
-    console.log(this.slotName)
+    // $event.style.background ='white'
+    // $event.style.color ='back'
+    //
+    // $event.style.background ='#ff4877'
+    // $event.style.color ='white'
+    this.slotName =  $event.id
     switch (this.slotName){
       case 'slot_sunday':
         this.timings = this.subResult.scheduleTimings.Sun
-        console.log(this.timings)
+        this.nameDay =this.arrDayWeek[6]
         break;
       case 'slot_monday':
         this.timings = this.subResult.scheduleTimings.Monday
+        this.nameDay =this.arrDayWeek[0]
         break;
       case 'slot_tuesday':
         this.timings = this.subResult.scheduleTimings.Thuesday
+        this.nameDay =this.arrDayWeek[1]
         break;
       case 'slot_wednesday':
         this.timings = this.subResult.scheduleTimings.Wenday
+        this.nameDay =this.arrDayWeek[2]
         break;
       case 'slot_thursday':
         this.timings = this.subResult.scheduleTimings.Thursday
+        this.nameDay =this.arrDayWeek[3]
         break;
       case 'slot_friday':
         this.timings = this.subResult.scheduleTimings.Friday
+        this.nameDay =this.arrDayWeek[4]
         break;
       case 'slot_saturday':
         this.timings = this.subResult.scheduleTimings.Sat
+        this.nameDay =this.arrDayWeek[5]
         break;
     }
     this.active =true;
-   // this.cdr.detectChanges();
   }
+  dates(current:any) {
+    var week= []
+    // Starting Monday not Sunday
+    current.setDate((current.getDate() - current.getDay() +1));
+    for (var i = 0; i < 7; i++) {
+      const yourDate =  new Date(current);
+      week.push(
+        yourDate.toISOString().split('T')[0]
+      );
+      current.setDate(current.getDate() +1);
+
+    }
+    return week;
+  }
+
 
 }

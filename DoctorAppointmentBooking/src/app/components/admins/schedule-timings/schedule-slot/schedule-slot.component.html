@@ -12,22 +12,26 @@
   </ng-container>
 
   <ng-template #Available>
+    <h4 class="card-title d-flex justify-content-between">
+      <span></span>
+      <a class="edit-link" data-toggle="modal" (click) = openModal()><i class="fa fa-plus-circle"></i> Add Slot</a>
+    </h4>
 
     <h4 class="card-title d-flex justify-content-between">
       <span>Time Slots</span>
-      <a class="edit-link" data-toggle="modal" href="#edit_time_slot"><i class="fa fa-edit mr-1"></i>Edit</a>
     </h4>
     <div class="doc-times">
 
-      <div *ngFor="let item of timings" class="doc-slot-list">
+      <div *ngFor="let item of timings" (click)="EditTimings(item.doctorId,item.scheduleTimingId)" class="doc-slot-list">
         {{item.atBegin | myTimePipe}} - {{item.atEnd | myTimePipe }}
         <a href="javascript:void(0)" class="delete_schedule">
           <i class="fa fa-times"></i>
         </a>
       </div>
     </div>
-
+    <app-update-schedule-timings #modalEdit [ids]="idSchedules" [dayNow]="nameDay" (successAdd)="eventFromModalEdit($event)" ></app-update-schedule-timings>
   </ng-template>
-  <app-add-schedule-timings #modalAdd (successAdd)="eventFromModal($event)"></app-add-schedule-timings>
+  <app-add-schedule-timings #modalAdd [dayNow]="nameDay"  (successAdd)="eventFromModal($event)"></app-add-schedule-timings>
+
 </div>
 

@@ -13,6 +13,8 @@ import {ScheduleTimingModel} from "../../../../interface/IScheduleTimings/Schedu
 import {IMessage} from "../../../../interface/Imessage.model";
 import {AddSpecialityComponent} from "../../specialities/add-speciality/add-speciality.component";
 import {AddScheduleTimingsComponent} from "../add-schedule-timings/add-schedule-timings.component";
+import {UpdateScheduleTimingsComponent} from "../update-schedule-timings/update-schedule-timings.component";
+import {ScheduleTimingsService} from "../../../../services/schedule-timings.service";
 
 @Component({
   selector: 'app-schedule-slot',
@@ -20,13 +22,18 @@ import {AddScheduleTimingsComponent} from "../add-schedule-timings/add-schedule-
   styleUrls: ['./schedule-slot.component.css']
 })
 export class ScheduleSlotComponent implements OnInit,AfterViewInit ,OnChanges,OnDestroy{
+  begin!:string
+  end!:string
+  idSchedules:any
   @Input() active:boolean =false
   @Input() timings:ScheduleTimingModel[]=[]
   @Input() id:any
+  @Input() nameDay:any
   @ViewChild('slotRef')slotRef!:ElementRef
   @ViewChild('modalAdd')modalAdd!:AddScheduleTimingsComponent
+  @ViewChild('modalEdit')modalEdit!:UpdateScheduleTimingsComponent
   idSlot:any;
-  constructor() { }
+  constructor(private scheduleService:ScheduleTimingsService) { }
 
   ngOnInit(): void {
     console.log(this.timings)
@@ -44,10 +51,31 @@ export class ScheduleSlotComponent implements OnInit,AfterViewInit ,OnChanges,On
     this.active =false;
   }
 
-  eventFromModal($event:IMessage){
-    console.log($event)
+
+  eventFromModal($event:any){
+     this.timings.push($event);
+     this.timings = [...this.timings]
   }
   openModal(){
      this.modalAdd.openModal();
   }
+
+  EditTimings(id:any,idSchedule:any)
+  {
+    this.idSchedules =idSchedule
+    console.log(id);
+    console.log(idSchedule);
+  this.scheduleService.getScheduleById(id,idSchedule).subscribe(
+    val=>{
+       this.begin = val.atBegin;
+       this.end = val.atEnd;
+    })
+    this.modalEdit.openModal();
+
+  }
+  eventFromModalEdit($event:any){
+   //this.timings.push($event);
+   // this.timings = [...this.timings]
+  }
+
 }
