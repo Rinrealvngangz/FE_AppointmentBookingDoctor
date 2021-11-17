@@ -16,7 +16,8 @@ import {AddScheduleTimingsComponent} from "../add-schedule-timings/add-schedule-
 import {UpdateScheduleTimingsComponent} from "../update-schedule-timings/update-schedule-timings.component";
 import {ScheduleTimingsService} from "../../../../services/schedule-timings.service";
 import {from, of} from "rxjs";
-import {filter, map} from "rxjs/operators";
+import {filter, map, toArray} from "rxjs/operators";
+import {ModalconfirmDoctorComponent} from "../../doctor-dash/modalconfirm-doctor/modalconfirm-doctor.component";
 
 @Component({
   selector: 'app-schedule-slot',
@@ -27,6 +28,7 @@ export class ScheduleSlotComponent implements OnInit,AfterViewInit ,OnChanges,On
   begin!:string
   end!:string
   idSchedules:any
+  idDelete:any
   @Input() active:boolean =false
   @Input() timings:ScheduleTimingModel[]=[]
   @Input() id:any
@@ -34,6 +36,7 @@ export class ScheduleSlotComponent implements OnInit,AfterViewInit ,OnChanges,On
   @ViewChild('slotRef')slotRef!:ElementRef
   @ViewChild('modalAdd')modalAdd!:AddScheduleTimingsComponent
   @ViewChild('modalEdit')modalEdit!:UpdateScheduleTimingsComponent
+  @ViewChild('modalDelete')modalDelete!:ModalconfirmDoctorComponent
   idSlot:any;
   constructor(private scheduleService:ScheduleTimingsService) { }
 
@@ -62,21 +65,21 @@ export class ScheduleSlotComponent implements OnInit,AfterViewInit ,OnChanges,On
      this.modalAdd.openModal();
   }
 
-  EditTimings(id:any,idSchedule:any)
+  EditTimings($event:any,id:any,idSchedule:any)
   {
-    this.idSchedules =idSchedule
-    console.log(id);
-    console.log(idSchedule);
-  this.scheduleService.getScheduleById(id,idSchedule).subscribe(
-    val=>{
-       this.begin = val.atBegin;
-       this.end = val.atEnd;
-    })
-    this.modalEdit.openModal();
-
+    if($event.target.className === 'doc-slot-list ng-star-inserted'){
+      this.idSchedules =idSchedule
+      console.log(id);
+      console.log(idSchedule);
+      this.scheduleService.getScheduleById(id,idSchedule).subscribe(
+        val=>{
+          this.begin = val.atBegin;
+          this.end = val.atEnd;
+        })
+      this.modalEdit.openModal();
+    }
   }
   eventFromModalEdit($event:any){
-    console.log($event)
     from(this.timings).pipe(
      filter(val => val.scheduleTimingId === $event.scheduleTimingId),
       map(data => {
@@ -87,6 +90,32 @@ export class ScheduleSlotComponent implements OnInit,AfterViewInit ,OnChanges,On
         }
       } )
     ).subscribe(rs => this.timings[0] = rs)
+  }
+
+  deleteTimings($event:any){
+    console.log()
+    this.idDelete =$event.target.parentElement.id;
+   this.modalDelete.openModal();
+  }
+
+  deleteSuccess($event:any){
+    if($event === 'save'){
+      console.log(this.idDelete)
+      this.scheduleService.deleteScheduleById(this.idDelete).subscribe(
+        rs => {
+          if(rs.status === 'success'){
+                 from(this.timings).pipe(
+                   filter(item => item.scheduleTimingId != this.idDelete),
+                   toArray()
+                ).subscribe(data=>{
+                  console.log(data)
+                  this.timings =[...data]
+                })
+            this.modalDelete.closeModal();
+          }
+        }
+      );
+    }
   }
 
 }

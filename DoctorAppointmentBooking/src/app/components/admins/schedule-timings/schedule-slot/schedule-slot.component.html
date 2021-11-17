@@ -22,9 +22,12 @@
     </h4>
     <div class="doc-times">
 
-      <div *ngFor="let item of timings" (click)="EditTimings(item.doctorId,item.scheduleTimingId)" class="doc-slot-list">
+      <div *ngFor="let item of timings" [style.background-color]="item.status === 0 ? '#42c0fb' : '#ff4877' "
+           [style.border-color]="item.status === 0 ? '#42c0fb' : '#ff4877' "
+           (click)='item.status === 0 ? EditTimings($event,item.doctorId,item.scheduleTimingId) : false' class="doc-slot-list">
         {{item.atBegin | myTimePipe}} - {{item.atEnd | myTimePipe }}
-        <a href="javascript:void(0)" class="delete_schedule">
+        <a href="javascript:void(0)" class="delete_schedule" id="{{item.scheduleTimingId}}"
+           (click)='item.status ===0 ? deleteTimings($event) : false'>
           <i class="fa fa-times"></i>
         </a>
       </div>
@@ -32,6 +35,6 @@
     <app-update-schedule-timings #modalEdit [ids]="idSchedules" [dayNow]="nameDay" (successAdd)="eventFromModalEdit($event)" ></app-update-schedule-timings>
   </ng-template>
   <app-add-schedule-timings #modalAdd [dayNow]="nameDay"  (successAdd)="eventFromModal($event)"></app-add-schedule-timings>
-
+  <app-modalconfirm-doctor #modalDelete (save)="deleteSuccess($event)"></app-modalconfirm-doctor>
 </div>
 

@@ -32,4 +32,8 @@ export class ScheduleTimingsService {
   updateScheduleById(id:any,body:any):Observable<IMessage>{
     return this.http.put<IMessage>(`api/v1/schedule/${id}`,body)
   }
+
+  deleteScheduleById(id:any):Observable<IMessage>{
+    return this.http.delete<IMessage>(`api/v1/schedule/${id}`);
+  }
 }
