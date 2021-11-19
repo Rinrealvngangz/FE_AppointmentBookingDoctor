@@ -13,10 +13,27 @@ import {checkDeactivate} from "../interface/checkDeactivate.model";
 import {Observable, of} from "rxjs";
 
 @Injectable()
-export class AuthGuardService implements CanActivateChild, CanDeactivate<checkDeactivate> {
+export class AuthGuardService implements CanActivateChild,CanActivate, CanDeactivate<checkDeactivate> {
   constructor(private authenService: AuthService,
               private router: Router) {
   }
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean  {
+    const isLogin = this.authenService.isLogin();
+    if(isLogin){
+      const isActivate =  this.authenService.isExpiredToken();
+      if(isActivate) return true;
+      else{
+        this.authenService.url = state.url
+        this.router.navigate(['/login']);
+        return false;
+      }
+    }else{
+      this.authenService.url = state.url
+      this.router.navigate(['/login']);
+      return false;
+    }
+    }
 
   canDeactivate
   (component: checkDeactivate,
@@ -41,7 +58,6 @@ export class AuthGuardService implements CanActivateChild, CanDeactivate<checkDe
       this.router.navigate(['/login']);
       return false;
     }
-
-
   }
+
 }

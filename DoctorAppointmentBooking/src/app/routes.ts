@@ -8,11 +8,20 @@ import {MainComponent} from "./components/home/main/main.component";
 import {BreadCrumbBarComponent} from "./components/bread-crumb-bar/bread-crumb-bar.component";
 import {DoctorDetailComponent} from "./components/doctor-detail/doctor-detail.component";
 import {BookingDoctorComponent} from "./components/booking-doctor/booking-doctor.component";
+import {RegisterComponent} from "./components/register/register.component";
+import {ProfileSettingsComponent} from "./components/patient/profile-settings/profile-settings.component";
+import {AuthGuardService} from "./services/auth-guard.service";
+import {DashboardPatientComponent} from "./components/patient/dashboard-patient/dashboard-patient.component";
+import {SidebarPatientComponent} from "./components/patient/sidebar-patient/sidebar-patient.component";
+import {ChangepasswordComponent} from "./components/patient/changepassword/changepassword.component";
 
 export const appRoutesHome:Routes = [
 
   {
     path:'login',component:LoginComponent
+  },
+  {
+    path:'register',component:RegisterComponent
   },
   {
     path:'dashboard',
@@ -24,6 +33,21 @@ export const appRoutesHome:Routes = [
     children:[
       {
         path:'home',component:HomesComponent,
+      },
+      {
+        path:'',component:DashboardPatientComponent,canActivateChild:[AuthGuardService],
+        children:[
+          {
+            path:'patient',component:SidebarPatientComponent,
+          },
+          {
+            path:'patient/profile-setting',component:ProfileSettingsComponent
+          },
+          {
+            path:'patient/profile-setting/password',component:ChangepasswordComponent
+          }
+
+        ]
       },
       {
         path:'doctor-profile',component:DoctorDetailComponent

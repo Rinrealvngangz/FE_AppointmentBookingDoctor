@@ -1,0 +1,102 @@
+<div class="main-wrapper login-body">
+  <div class="login-wrapper">
+    <div class="container">
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+
+  <div class="account-content">
+  <div class="row align-items-center justify-content-center">
+    <div class="col-md-7 col-lg-6 login-left">
+      <img src="assets/img/login-banner.png" class="img-fluid" alt="Doccure Register">
+    </div>
+    <div class="col-md-12 col-lg-6 login-right">
+      <form [formGroup] = "createPatientForm" (ngSubmit)="addPatient(createPatientForm.value)"
+            autocomplete="off" novalidate>
+        <div class="form-group form-focus">
+          <input formControlName="email" type="text" class="form-control floating">
+          <label class="focus-label">Email</label>
+          <em *ngIf="createPatientForm.controls.email.errors?.required">
+            Required
+          </em>
+          <em *ngIf=" createPatientForm.controls.email.errors?.email">
+            Email invalid
+          </em>
+        </div>
+        <div class="form-group form-focus"  [ngClass]="{'error':!validFirstNameCreatePatient()}">
+          <input formControlName="firstName" type="text" class="form-control floating">
+          <label class="focus-label">First name</label>
+          <em *ngIf="!validFirstNameCreatePatient()
+          && createPatientForm.controls.firstName.errors?.required">
+            Required
+          </em>
+          <em *ngIf="!validFirstNameCreatePatient()
+               && createPatientForm.controls.firstName.errors?.pattern">
+            Must start with a letter
+          </em>
+        </div>
+        <div class="form-group form-focus" [ngClass]="{'error':!validLastNameCreatePatient()}">
+          <input formControlName="lastName" type="text" class="form-control floating">
+          <label class="focus-label">Last name</label>
+          <em *ngIf="!validLastNameCreatePatient()
+           && createPatientForm.controls.lastName.errors?.required">
+            Required
+          </em>
+          <em *ngIf="!validLastNameCreatePatient()
+          && createPatientForm.controls.lastName.errors?.pattern">
+            Must start with a letter
+          </em>
+        </div>
+        <div class="form-group form-focus" [ngClass]="{'error':!validPhoneCreatePatient()}">
+          <input formControlName="phone" type="text" class="form-control floating">
+          <label class="focus-label">Phone number</label>
+          <em *ngIf="!validPhoneCreatePatient()
+          && createPatientForm.controls.phone.errors?.required">
+            Required
+          </em>
+          <em *ngIf="!validPhoneCreatePatient()
+          && createPatientForm.controls.phone.errors?.phone">
+            {{createPatientForm.controls.phone.errors?.phone}}
+          </em>
+        </div>
+        <div class="form-group form-focus">
+          <input formControlName="password" type="password" class="form-control floating">
+          <label class="focus-label">Create Password</label>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-lg-12 col-form-label">Gender</label>
+          <div class="col-lg-9">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" formControlName="gender"  value="0" id="gender_male">
+              <label class="form-check-label" for="gender_male">
+                Male
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender"  formControlName="gender" value="1" id="gender_female" >
+              <label class="form-check-label" for="gender_female">
+                Female
+              </label>
+            </div>
+            <em *ngIf="!validGenderCreatePatient()">
+              Required
+            </em>
+          </div>
+        </div>
+        <div class="text-right">
+          <a class="forgot-link" href="login.html">Already have an account?</a>
+        </div>
+        <span (mouseenter)="mouseover=true" (mouseleave)="mouseover=false">
+        <button class="btn btn-primary btn-block btn-lg login-btn"
+                [disabled]="createPatientForm.invalid" type="submit">Signup</button>
+        </span>
+      </form>
+
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>

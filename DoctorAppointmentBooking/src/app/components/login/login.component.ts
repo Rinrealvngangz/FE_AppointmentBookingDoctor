@@ -12,6 +12,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class LoginComponent implements OnInit  {
   nameOrEmail:string=''
   password:string =''
+  type:string =''
   data:Subscription =new Subscription()
   constructor(private authenService:AuthService,private router:Router) { }
 
@@ -21,12 +22,14 @@ export class LoginComponent implements OnInit  {
     // @ts-ignore
   login(frmLogin:any){
         const isDoctorlogin = frmLogin.nameOrEmail;
+    console.log(isDoctorlogin)
         if(isDoctorlogin){
           const data={
             nameOrEmail:frmLogin.nameOrEmail,
              password:frmLogin.password
           }
-          const pathRouter = data.nameOrEmail.includes('@') ? 'doctor' : 'admin';
+          let pathRouter = data.nameOrEmail.includes('@') ? 'doctor' : 'admin';
+          if(frmLogin.type !== 'doctor') pathRouter = 'patient';
            this.authenService.login(data,pathRouter).subscribe(data =>{
              if(data.status === 'success'){
                if(this.authenService.url === ''){

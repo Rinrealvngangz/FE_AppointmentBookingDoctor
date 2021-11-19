@@ -1,0 +1,61 @@
+
+          <div class="card">
+            <div class="card-body">
+              <form #frmEdit = 'ngForm' (ngSubmit)="saveChange(frmEdit.value)" novalidate autocomplete="off">
+                <div class="row form-row">
+                  <div class="col-12 col-md-12">
+                    <div class="form-group">
+                      <div class="change-avatar">
+                        <div class="profile-img">
+                          <img src="assets/img/patients/patient.jpg" alt="User Image">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label>First Name</label>
+                      <input [(ngModel)]="firstName" name="firstName" type="text" class="form-control" required>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label>Last Name</label>
+                      <input [(ngModel)]="lastName" name="lastName" type="text" class="form-control" required>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label>Phone number</label>
+                      <input [(ngModel)]="phone" name="phone" type="text" class="form-control" required>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                  <div class="form-group row">
+                    <label class="col-lg-12 col-form-label">Gender</label>
+                    <div class="col-lg-9">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" [(ngModel)]="gender"
+                               value="0" id="gender_male" [checked]="gender === 0" required>
+                        <label class="form-check-label" for="gender_male">
+                          Male
+                        </label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender"  [(ngModel)]="gender"
+                               value="1" id="gender_female" [checked]="gender === 1" required>
+                        <label class="form-check-label" for="gender_female">
+                          Female
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+                <div class="submit-section">
+                  <button type="submit" [disabled]="frmEdit.invalid" class="btn btn-primary submit-btn">Save Changes</button>
+                </div>
+              </form>
+            </div>
+          </div>
+

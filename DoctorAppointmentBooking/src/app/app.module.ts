@@ -15,6 +15,7 @@ import { LoaderInterceptor } from './interceptors/loader-interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import  {JwtModule} from "@auth0/angular-jwt";
 import {AuthService} from "./services/auth.service";
+import {PatientService} from "./services/patient.service";
 // directive customer
 import { EventHoverDirective } from './directives/event.directive';
 //importService , component home
@@ -39,13 +40,18 @@ import { SpecialitiesService } from './services/specialities.service';
 import { ErrorInterceptor } from './interceptors/Error-interceptor';
 import { AdminService } from './services/admins.service';
 import { LoginComponent } from './components/login/login.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import  {AuthGuardService} from "./services/auth-guard.service";
 import {AdminGuardService} from "./services/admin-guard.service";
 import  {AuthDashBoardGuardService} from "./services/authDashBoard-guard.service";
 import { MainComponent } from './components/home/main/main.component';
 import { DoctorDetailComponent } from './components/doctor-detail/doctor-detail.component';
 import { BookingDoctorComponent } from './components/booking-doctor/booking-doctor.component';
+import { RegisterComponent } from './components/register/register.component';
+import { ProfileSettingsComponent } from './components/patient/profile-settings/profile-settings.component';
+import { DashboardPatientComponent } from './components/patient/dashboard-patient/dashboard-patient.component';
+import { SidebarPatientComponent } from './components/patient/sidebar-patient/sidebar-patient.component';
+import { ChangepasswordComponent } from './components/patient/changepassword/changepassword.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,30 +72,36 @@ import { BookingDoctorComponent } from './components/booking-doctor/booking-doct
     LoginComponent,
     MainComponent,
     DoctorDetailComponent,
-    BookingDoctorComponent
+    BookingDoctorComponent,
+    RegisterComponent,
+    ProfileSettingsComponent,
+    DashboardPatientComponent,
+    SidebarPatientComponent,
+    ChangepasswordComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    CarouselModule,
-    LightboxModule,
-    RouterModule.forRoot(appRoutesHome),
-    HttpClientModule,
-    AdminsModule,
-    NgxSpinnerModule,
-    ToastrModule.forRoot({
-      timeOut: 2000,
-      positionClass: 'toast-top-right',
-      preventDuplicates: true,
-      progressBar: true
-    }),
-    // JwtModule.forRoot({
-    //   config: {
-    //     allowedDomains: ["localhost:3000"]
-    //   }
-    // }),
-    FormsModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        CarouselModule,
+        LightboxModule,
+        RouterModule.forRoot(appRoutesHome),
+        HttpClientModule,
+        AdminsModule,
+        NgxSpinnerModule,
+        ToastrModule.forRoot({
+            timeOut: 2000,
+            positionClass: 'toast-top-right',
+            preventDuplicates: true,
+            progressBar: true
+        }),
+        // JwtModule.forRoot({
+        //   config: {
+        //     allowedDomains: ["localhost:3000"]
+        //   }
+        // }),
+        FormsModule,
+        ReactiveFormsModule
+    ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers:[
     SpecialitiesService,
@@ -101,6 +113,7 @@ import { BookingDoctorComponent } from './components/booking-doctor/booking-doct
     AdminGuardService,
     AuthDashBoardGuardService,
     BreadCrumbsService,
+    PatientService,
     {
       provide: APP_BASE_HREF,
       useValue:'/'

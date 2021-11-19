@@ -53,6 +53,12 @@ export class AuthService {
     const decodedToken =  this.helper.decodeToken(token);
     return decodedToken.doctorId;
   }
+  getPatientId():number{
+    const token =  localStorage.getItem("access_token");
+    // @ts-ignore
+    const decodedToken =  this.helper.decodeToken(token);
+    return decodedToken.patientId;
+  }
   isExpiredToken():boolean{
     const token = localStorage.getItem("access_token");
    // @ts-ignore
