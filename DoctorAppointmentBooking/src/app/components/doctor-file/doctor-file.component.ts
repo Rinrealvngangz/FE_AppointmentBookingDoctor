@@ -28,6 +28,10 @@ interface album{
 })
 
 export class DoctorFileComponent implements OnInit {
+  @Input() idDoctor:number =0
+  @Input() src:string =''
+  @Input() nameDoctor:string =''
+  @Input() speciality:string=''
   breadcrumbComp!:ComponentRef<BreadCrumbBarComponent>
   BreadCrumbs:IBreadCrumb[]=[]
   @ViewChild('breadCrumb',{read:ViewContainerRef}) breadTempl!:ViewContainerRef

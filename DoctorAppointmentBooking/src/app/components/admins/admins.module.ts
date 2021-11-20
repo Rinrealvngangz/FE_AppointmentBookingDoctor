@@ -138,6 +138,7 @@ const routes: Routes =[
     ReactiveFormsModule
   ],
   exports:[
+    MyTimePipe,
     AdminComponent,
     NavbarAdminComponent,
     SidebarAdminComponent,

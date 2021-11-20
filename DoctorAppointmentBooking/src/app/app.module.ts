@@ -18,6 +18,7 @@ import {AuthService} from "./services/auth.service";
 import {PatientService} from "./services/patient.service";
 // directive customer
 import { EventHoverDirective } from './directives/event.directive';
+
 //importService , component home
 import {
   HeaderComponent,
@@ -52,6 +53,7 @@ import { ProfileSettingsComponent } from './components/patient/profile-settings/
 import { DashboardPatientComponent } from './components/patient/dashboard-patient/dashboard-patient.component';
 import { SidebarPatientComponent } from './components/patient/sidebar-patient/sidebar-patient.component';
 import { ChangepasswordComponent } from './components/patient/changepassword/changepassword.component';
+import {HightlightColorDirective} from "./directives/hightlightColor.directive";
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,6 +71,7 @@ import { ChangepasswordComponent } from './components/patient/changepassword/cha
     BreadCrumbBarComponent,
     DoctorComponent,
     EventHoverDirective,
+    HightlightColorDirective,
     LoginComponent,
     MainComponent,
     DoctorDetailComponent,

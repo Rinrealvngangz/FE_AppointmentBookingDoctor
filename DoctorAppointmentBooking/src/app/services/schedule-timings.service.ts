@@ -21,6 +21,7 @@ export class ScheduleTimingsService {
   getById(id:any):Observable<ScheduleTimingModels>{
     return this.http.get<ScheduleTimingModels>(`api/v1/schedule/${id}`)
   }
+
   addTimings(id:any,body:any):Observable<IMessage>{
             return this.http.post<IMessage>(`api/v1/schedule/${id}`,body)
   }
@@ -28,6 +29,10 @@ export class ScheduleTimingsService {
   getScheduleById(id:any,idSchedule:any):Observable<any>{
     return this.http.get<any>(`api/v1/schedule/${id}/get/${idSchedule}`)
   }
+  getScheduleWeekById(id:any):Observable<ScheduleTimingModels>{
+    return this.http.get<ScheduleTimingModels>(`api/v1/scheduleWeek/${id}`)
+  }
+
 
   updateScheduleById(id:any,body:any):Observable<IMessage>{
     return this.http.put<IMessage>(`api/v1/schedule/${id}`,body)
