@@ -1,23 +1,43 @@
-import {Directive, ElementRef, HostListener, Renderer2} from "@angular/core";
+import {Directive, ElementRef, HostListener, Input, Renderer2} from "@angular/core";
+import {ScheduleTimingModel} from "../interface/IScheduleTimings/ScheduleTiming.model";
+import {ScheduleTimingsService} from "../services/schedule-timings.service";
 
 @Directive({
   selector: `[appHighlight]`
 })
 export class HightlightColorDirective {
-  constructor(private el: ElementRef, private renderer: Renderer2) { }
+  @Input() schedule:ScheduleTimingModel
+  constructor(private el: ElementRef, private renderer: Renderer2,
+              private scheduleService:ScheduleTimingsService) { }
   @HostListener('mouseenter')onMouseHover(){
     this.el.nativeElement.style.cursor ='pointer';
   }
 
-  @HostListener('document:click', ['$event.target'])
-
+  @HostListener('document:click', ['$event'])
   handleClick(event: Event) {
-    if (this.el.nativeElement.contains(event)) {
-      this.highlight('#42c0fb');
+    if((event.target as Element).className.length ===0  ||
+      (event.target as Element).className === 'timing' ||
+      (event.target as Element).className ==='submit-section proceed-btn text-right'){
+      if (this.el.nativeElement.contains(event.target)) {
+        this.highlight('#42c0fb');
+        const storageSchedule =  localStorage.getItem("schedule");
+        if(storageSchedule){
+          const timings:ScheduleTimingModel = JSON.parse(storageSchedule);
+          if(timings.scheduleTimingId !== this.schedule.scheduleTimingId){
+            localStorage.setItem("schedule",JSON.stringify(this.schedule));
+          }
+        }else{
+          localStorage.setItem("schedule",JSON.stringify(this.schedule));
+        }
+      }
+      else {
+        this.nohighlight('#e9e9e9')
+      }
+    }else{
+      this.nohighlight('#e9e9e9')
+      localStorage.removeItem("schedule");
     }
-    else {
-     this.nohighlight('#e9e9e9')
-    }
+
   }
 
   highlight(color:any) {

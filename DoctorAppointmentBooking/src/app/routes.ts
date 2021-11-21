@@ -14,6 +14,7 @@ import {AuthGuardService} from "./services/auth-guard.service";
 import {DashboardPatientComponent} from "./components/patient/dashboard-patient/dashboard-patient.component";
 import {SidebarPatientComponent} from "./components/patient/sidebar-patient/sidebar-patient.component";
 import {ChangepasswordComponent} from "./components/patient/changepassword/changepassword.component";
+import {CheckoutPatientComponent} from "./components/checkout-patient/checkout-patient.component";
 
 export const appRoutesHome:Routes = [
 
@@ -58,6 +59,10 @@ export const appRoutesHome:Routes = [
       },
       {
         path:'doctor-profile/:id/booking',component:BookingDoctorComponent
+      },
+      {
+        path:'doctor-profile/:id/booking/checkout',component:CheckoutPatientComponent,
+        canActivate:[AuthGuardService]
       },
       {
         path:'',redirectTo:'home',pathMatch:'full'

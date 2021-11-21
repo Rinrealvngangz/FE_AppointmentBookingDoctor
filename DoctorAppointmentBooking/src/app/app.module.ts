@@ -54,6 +54,7 @@ import { DashboardPatientComponent } from './components/patient/dashboard-patien
 import { SidebarPatientComponent } from './components/patient/sidebar-patient/sidebar-patient.component';
 import { ChangepasswordComponent } from './components/patient/changepassword/changepassword.component';
 import {HightlightColorDirective} from "./directives/hightlightColor.directive";
+import { CheckoutPatientComponent } from './components/checkout-patient/checkout-patient.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,7 +81,8 @@ import {HightlightColorDirective} from "./directives/hightlightColor.directive";
     ProfileSettingsComponent,
     DashboardPatientComponent,
     SidebarPatientComponent,
-    ChangepasswordComponent
+    ChangepasswordComponent,
+    CheckoutPatientComponent
   ],
     imports: [
         BrowserModule,

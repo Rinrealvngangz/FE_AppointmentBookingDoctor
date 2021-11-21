@@ -10,14 +10,18 @@ import {DoctorPopularService} from "../../services/popular.service";
   selector: 'app-booking',
   templateUrl: './booking.component.html',
   styles:[
-    'li.nav-item.active { background: green; }\n'
+    'li.nav-item.active { background: green; }',
+    'a.disabled {pointer-events: none; cursor: default}'
+
   ]
 })
 export class BookingComponent implements OnInit {
-  week:WeekModel [] =[]
+  week:WeekModel [] =[];
   name:string =''
   speciality:string = ''
   src:string =''
+  id:any
+  checkBooking:boolean= false;
   scheduleTimeModel:ScheduleByDateModel
   constructor(private scheduleService:ScheduleTimingsService,
               private router:ActivatedRoute,
@@ -63,7 +67,12 @@ export class BookingComponent implements OnInit {
       this.name =result.name
       this.speciality =result.specialitiesName
       this.src =result.src
-
+      this.id =result.id
     })
+  }
+
+  checkScheduleStorage(){
+  const schedule =  localStorage.getItem("schedule")
+    return schedule ? this.checkBooking =true : this.checkBooking =false
   }
 }

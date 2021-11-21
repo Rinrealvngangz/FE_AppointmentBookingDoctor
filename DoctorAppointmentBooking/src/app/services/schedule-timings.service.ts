@@ -13,6 +13,8 @@ import {IMessage} from "../interface/Imessage.model";
 })
 
 export class ScheduleTimingsService {
+  count:number =0;
+  countNoClick:number =0;
    scheduleTimingDoctor!:ScheduleTimingDoctorModel;
   result:Subscription =new Subscription();
   constructor(private  http:HttpClient) {
@@ -41,4 +43,5 @@ export class ScheduleTimingsService {
   deleteScheduleById(id:any):Observable<IMessage>{
     return this.http.delete<IMessage>(`api/v1/schedule/${id}`);
   }
+
 }

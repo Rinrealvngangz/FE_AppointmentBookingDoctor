@@ -52,32 +52,32 @@
                     <ng-container *ngIf="scheduleTimeModel">
                       <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
                           *ngFor="let item of scheduleTimeModel.Monday">
-                        <a appHighlight class="timing">
+                        <a appHighlight [schedule]="item" class="timing">
                           <span>{{item.atBegin | myTimePipe}}</span> <span>AM</span>
                         </a>
                       </li>
                       <li *ngFor="let item of scheduleTimeModel.Thuesday">
-                        <a appHighlight class="timing">
+                        <a appHighlight [schedule]="item" class="timing">
                           <span>{{item.atBegin | myTimePipe}}</span> <span>AM</span>
                         </a>
                       </li>
                       <li *ngFor="let item of scheduleTimeModel.Wenday">
-                        <a appHighlight class="timing">
+                        <a appHighlight [schedule]="item" class="timing">
                           <span>{{item.atBegin | myTimePipe}}</span> <span>AM</span>
                         </a>
                       </li>
                       <li *ngFor="let item of scheduleTimeModel.Thursday">
-                        <a appHighlight class="timing">
+                        <a appHighlight [schedule]="item" class="timing">
                           <span>{{item.atBegin | myTimePipe}}</span> <span>AM</span>
                         </a>
                       </li>
                       <li *ngFor="let item of scheduleTimeModel.Friday">
-                        <a  appHighlight class="timing">
+                        <a  appHighlight [schedule]="item" class="timing">
                           <span>{{item.atBegin | myTimePipe}}</span> <span>AM</span>
                         </a>
                       </li>
                       <li *ngFor="let item of scheduleTimeModel.Sat">
-                        <a appHighlight class="timing">
+                        <a appHighlight [schedule]="item" class="timing">
                           <span>{{item.atBegin | myTimePipe}}</span> <span>AM</span>
                         </a>
                       </li>
@@ -90,7 +90,8 @@
           </div>
         </div>
         <div class="submit-section proceed-btn text-right">
-          <a href="checkout.html" class="btn btn-primary submit-btn">Proceed to Pay</a>
+          <a [routerLink]="['/doctor-profile',id,'booking','checkout']"
+             class="btn btn-primary submit-btn" [ngClass]="{'disabled':!checkScheduleStorage() }">Book now</a>
         </div>
       </div>
     </div>
