@@ -30,6 +30,7 @@ import { AddScheduleTimingsComponent } from './schedule-timings/add-schedule-tim
 import { BeginEndTimingsComponent } from './schedule-timings/begin-end-timings/begin-end-timings.component';
 import { UpdateScheduleTimingsComponent } from './schedule-timings/update-schedule-timings/update-schedule-timings.component';
 import { AppointmentComponent } from './appointment/appointment.component';
+import { PatientsComponent } from './patients/patients.component';
 
 const routes: Routes =[
 
@@ -80,6 +81,13 @@ const routes: Routes =[
          path:'scheduleTimings',component:ScheduleTimingsComponent,
          data:{
            breadcrumb:"scheduleTimings"
+         },
+         canActivateChild:[AuthDashBoardGuardService]
+       },
+       {
+         path:'patients',component:PatientsComponent,
+         data:{
+           breadcrumb:"patients"
          },
          canActivateChild:[AuthDashBoardGuardService]
        },
@@ -138,7 +146,8 @@ const routes: Routes =[
     AddScheduleTimingsComponent,
     BeginEndTimingsComponent,
     UpdateScheduleTimingsComponent,
-    AppointmentComponent
+    AppointmentComponent,
+    PatientsComponent
   ],
   imports: [
     CommonModule,

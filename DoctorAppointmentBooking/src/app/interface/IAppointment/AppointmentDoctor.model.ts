@@ -1,5 +1,6 @@
 export interface AppointmentDoctorModel{
   appointmentId:string,
+  scheduleTimingId:string,
   patientId:string,
   fullName:string,
   phone:string,

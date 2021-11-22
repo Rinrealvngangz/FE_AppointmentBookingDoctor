@@ -16,6 +16,12 @@ export class AppointmentService{
     addAppointment(body:any):Observable<IMessage>{
       return this.http.post<IMessage>('api/v1/appointment',body);
     }
+
+  updateStatusAppointment(id:any,status:any):Observable<IMessage>{
+    console.log(status)
+    return this.http.put<IMessage>(`api/v1/appointment/${id}/checkout`,status);
+  }
+
     getAppointmentByPatientId(id:any):Observable<AppointmentPatientModels>{
     return this.http.get<AppointmentPatientModels>(`api/v1/appointments-patient/${id}`);
     }

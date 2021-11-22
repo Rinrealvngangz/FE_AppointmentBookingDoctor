@@ -41,9 +41,18 @@ export class AppointmentComponent implements OnInit {
      this.rows = data.appointments;
     })
   }
+
   saveStatus(id:any){
-    console.log(id)
+     const status ={
+       statusId:1
+     };
+     this.appointmentService.updateStatusAppointment(id,status).subscribe(data=>{
+       if(data.status === 'success'){
+         this.getAllAppointment();
+       }
+     })
   }
+
   removeAppointment(id:any){
     console.log(id)
   }

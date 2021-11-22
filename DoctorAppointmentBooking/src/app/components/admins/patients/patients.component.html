@@ -58,30 +58,7 @@
           {{ value |myTimePipe }}
         </ng-template>
       </ngx-datatable-column>
-
-      <ngx-datatable-column>
-      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex">
-      <ng-container *ngIf="rows[rowIndex].status === 0">
-            <a  data-toggle="modal"  (click)="saveStatus(rows[rowIndex].scheduleTimingId)"
-                class="btn btn-sm bg-success-light">
-                Chấp nhận
-            </a>
-      </ng-container>
-        </ng-template>
-      </ngx-datatable-column>
-
-      <ngx-datatable-column >
-        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex">
-        <a  data-toggle="modal" (click)="removeAppointment(rows[rowIndex].scheduleTimingId)" class="btn btn-sm bg-danger-light">
-          <i class="fe fe-trash"></i>Hủy
-        </a>
-        </ng-template>
-      </ngx-datatable-column>
-
-
-
-
-
     </ngx-datatable>
   </div>
 </app-admin>
+

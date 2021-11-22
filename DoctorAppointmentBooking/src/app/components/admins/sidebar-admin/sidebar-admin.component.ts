@@ -16,8 +16,8 @@ export class SidebarAdminComponent implements OnInit {
     this.authAdmin =this.authenService.getNameRole();
     this.getId();
   }
+
   getId(){
    this.id =  this.authenService.getId();
-
   }
 }
