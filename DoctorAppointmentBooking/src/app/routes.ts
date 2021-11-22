@@ -15,6 +15,8 @@ import {DashboardPatientComponent} from "./components/patient/dashboard-patient/
 import {SidebarPatientComponent} from "./components/patient/sidebar-patient/sidebar-patient.component";
 import {ChangepasswordComponent} from "./components/patient/changepassword/changepassword.component";
 import {CheckoutPatientComponent} from "./components/checkout-patient/checkout-patient.component";
+import {AppointmentPatientComponent} from "./components/appointment/appointment-patient/appointment-patient.component";
+import {BookingSuccessComponent} from "./components/booking/booking-success/booking-success.component";
 
 export const appRoutesHome:Routes = [
 
@@ -62,6 +64,14 @@ export const appRoutesHome:Routes = [
       },
       {
         path:'doctor-profile/:id/booking/checkout',component:CheckoutPatientComponent,
+        canActivate:[AuthGuardService]
+      },
+      {
+        path:'user/:id/appointment',component:AppointmentPatientComponent,
+        canActivate:[AuthGuardService]
+      },
+      {
+        path:'user/:id/bookingSuccess/:idAppointment',component:BookingSuccessComponent,
         canActivate:[AuthGuardService]
       },
       {

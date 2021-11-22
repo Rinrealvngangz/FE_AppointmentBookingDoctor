@@ -58,6 +58,7 @@ export class ScheduleSlotComponent implements OnInit,AfterViewInit ,OnChanges,On
 
 
   eventFromModal($event:any){
+    $event.status = 0
      this.timings.push($event);
      this.timings = [...this.timings]
   }

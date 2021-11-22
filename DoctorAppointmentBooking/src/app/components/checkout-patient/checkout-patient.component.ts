@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {DoctorPopularService} from "../../services/popular.service";
 import {concatMap, map, switchMap} from "rxjs/operators";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ScheduleByDateModel} from "../../interface/IScheduleTimings/ScheduleByDate.model";
 import {ScheduleTimingModel} from "../../interface/IScheduleTimings/ScheduleTiming.model";
 import {PatientService} from "../../services/patient.service";
+import {AppointmentService} from "../../services/appointment.service";
 
 @Component({
   selector: 'app-checkout-patient',
@@ -23,10 +24,14 @@ export class CheckoutPatientComponent implements OnInit {
  beginTime:string ='';
  endTime:string ='';
  checkLogin:boolean =false;
+  scheduleId:any
+  patientId:any
   constructor(private authService :AuthService,
               private doctorService :DoctorPopularService,
               private router:ActivatedRoute,
-              private patient :PatientService) { }
+              private patient :PatientService,
+              private appointmentSerice:AppointmentService,
+              private routerNav:Router) { }
 
   ngOnInit(): void {
     this.callDoctorDetail();
@@ -51,10 +56,22 @@ export class CheckoutPatientComponent implements OnInit {
        this.date =schedule.bookDate.toString();
        this.endTime =schedule.atEnd;
        this.beginTime =schedule.atBegin;
+       this.scheduleId =schedule.scheduleTimingId;
     }
   }
-  checkout(data:any){
-    console.log(data)
+  checkout(data:any) {
+  const body = {
+    scheduleId:data.scheduleId,
+    patientId:data.patientId
+  }
+    this.appointmentSerice.addAppointment(body).subscribe(
+      rs =>{
+        if(rs.status === 'success'){
+             localStorage.removeItem("schedule")
+          this.routerNav.navigate(['user',this.patientId,'bookingSuccess',rs.idAppointment])
+        }
+      }
+    )
   }
 
   getInfoCustomer(){
@@ -68,6 +85,7 @@ export class CheckoutPatientComponent implements OnInit {
            this.lastName =data.patient.lastName;
            this.email =data.patient.email;
            this.phone =data.patient.phone;
+           this.patientId =data.patient.patientId;
          }
        )
     }

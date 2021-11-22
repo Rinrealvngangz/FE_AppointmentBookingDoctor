@@ -20,7 +20,7 @@ export class DoctorPopularService{
         if(data.doctors.length>0){
             const doctors =data.doctors;
               let i =1;
-              doctors.slice(0,5).forEach(el => {
+              doctors.slice(0,10).forEach(el => {
 
                   const doctor:IdoctorPopular = {
                    id : el.doctorId,
@@ -68,8 +68,7 @@ export class DoctorPopularService{
         'Content-Type': 'application/json',
         "Access-Control-Allow-Origin": '*'
         });
-          return this.http.post<IMessage>('api/v1/doctor',
-                             doctor)
+          return this.http.post<IMessage>('api/v1/doctor',doctor)
     }
 
     getDoctorById(id:any):Observable<IDoctor>{

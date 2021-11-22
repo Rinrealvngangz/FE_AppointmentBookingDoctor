@@ -7,7 +7,19 @@ import {AuthService} from "../../../services/auth.service";
 })
 export class HeaderComponent implements OnInit {
  @Input() authenticated!:boolean;
-  constructor() { }
+  id:any;
+  constructor(private authen:AuthService) { }
   ngOnInit(): void {
   }
+
+  checkAuth(){
+    return this.authen.isExpiredToken() && this.authen.isLogin();
+  }
+  getIdUser(){
+    if(this.checkAuth()){
+    this.id =  this.authen.getPatientId();
+    return this.id;
+    }
+  }
+
 }

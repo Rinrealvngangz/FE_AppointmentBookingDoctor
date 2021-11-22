@@ -56,7 +56,9 @@ export class BookingComponent implements OnInit {
    this.router.paramMap.pipe(
      map(param=> param.get('id')),
      switchMap(id =>this.scheduleService.getScheduleWeekById(id))
-   ).subscribe(result => this.scheduleTimeModel =result.scheduleTimings)
+   ).subscribe(result => {
+     this.scheduleTimeModel =result.scheduleTimings
+   })
   }
   getDoctorById(){
     this.router.paramMap.pipe(

@@ -1,0 +1,49 @@
+<app-bread-crumb-bar>
+  <div underBread class="content">
+    <div class="container-fluid">
+
+      <div class="row">
+
+        <div class="col-md-7 col-lg-8 col-xl-9">
+          <div class="appointments">
+
+            <div *ngFor="let item of dataAppointmentPatient" class="appointment-list">
+              <div class="profile-info-widget">
+                <a href="patient-profile.html" class="booking-doc-img">
+                  <img src="{{item.src}}" alt="User Image">
+                </a>
+                <div class="profile-det-info">
+                  <h3><a [routerLink]="['/doctor-profile',item.doctorId]">{{item.fullName}}</a></h3>
+                  <div class="patient-details">
+                    <h5><i class="far fa-clock"></i> {{item.bookDate | date:'mediumDate'}}, {{item.atBegin | myTimePipe}}</h5>
+                    <h5><i class="fas fa-map-marker-alt"></i> Da Lat, Viet Nam</h5>
+                    <h5><i class="fas fa-envelope"></i>{{item.email}}</h5>
+                    <h5 class="mb-0"><i class="fas fa-phone"></i>{{item.phone}}</h5>
+                  </div>
+                </div>
+              </div>
+              <div class="appointment-action">
+                <ng-container *ngIf="item.status ===0 else accept">
+                  <a style="cursor: pointer" class="btn btn-sm bg-danger-light">
+                    <i class="fas fa-uncheck"></i> Chưa chấp nhận
+                  </a>
+                  <a style="cursor: pointer" (click)="deleteAppointment(item.appointmentId)"  class="btn btn-sm bg-danger-light">
+                    <i class="fas fa-times"></i> Hủy
+                  </a>
+                </ng-container>
+              <ng-template #accept>
+                <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
+                  <i class="fas fa-check"></i> Đã chấp nhận
+                </a>
+              </ng-template>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <app-modalconfirm-doctor (save)=removeAppointment($event) #modalRemove></app-modalconfirm-doctor>
+  </div>
+</app-bread-crumb-bar>
+

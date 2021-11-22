@@ -33,6 +33,16 @@
                         <input  [(ngModel)]="phone" name="phone"  class="form-control" type="text" required>
                       </div>
                     </div>
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group card-label">
+                        <input hidden  [(ngModel)]="patientId" name="patientId"  class="form-control" type="text">
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group card-label">
+                        <input hidden  [(ngModel)]="scheduleId" name="scheduleId"  class="form-control" type="text">
+                      </div>
+                    </div>
                   </div>
                    <ng-container *ngIf="!checkLogin">
                      <div class="exist-customer">Existing Customer? <a [routerLink]="['/login']">Click here to login</a></div>
@@ -89,8 +99,6 @@
               </div>
             </div>
           </div>
-          <!-- /Booking Summary -->
-
         </div>
       </div>
     </div>

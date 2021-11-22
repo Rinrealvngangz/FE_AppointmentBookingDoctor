@@ -50,34 +50,39 @@
                 <div class="time-slot">
                   <ul class="clearfix">
                     <ng-container *ngIf="scheduleTimeModel">
-                      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-                          *ngFor="let item of scheduleTimeModel.Monday">
-                        <a appHighlight [schedule]="item" class="timing">
+                      <li>
+                        <a *ngFor="let item of scheduleTimeModel.Monday"
+                           appHighlight [schedule]="item" class="timing">
                           <span>{{item.atBegin | myTimePipe}}</span> <span>AM</span>
                         </a>
                       </li>
-                      <li *ngFor="let item of scheduleTimeModel.Thuesday">
-                        <a appHighlight [schedule]="item" class="timing">
+                      <li>
+                        <a  *ngFor="let item of scheduleTimeModel.Thuesday"
+                            appHighlight [schedule]="item" class="timing">
                           <span>{{item.atBegin | myTimePipe}}</span> <span>AM</span>
                         </a>
                       </li>
-                      <li *ngFor="let item of scheduleTimeModel.Wenday">
-                        <a appHighlight [schedule]="item" class="timing">
+                      <li>
+                        <a  *ngFor="let item of scheduleTimeModel.Wenday"
+                            appHighlight [schedule]="item" class="timing">
                           <span>{{item.atBegin | myTimePipe}}</span> <span>AM</span>
                         </a>
                       </li>
-                      <li *ngFor="let item of scheduleTimeModel.Thursday">
-                        <a appHighlight [schedule]="item" class="timing">
+                      <li>
+                        <a *ngFor="let item of scheduleTimeModel.Thursday"
+                           appHighlight [schedule]="item" class="timing">
                           <span>{{item.atBegin | myTimePipe}}</span> <span>AM</span>
                         </a>
                       </li>
-                      <li *ngFor="let item of scheduleTimeModel.Friday">
-                        <a  appHighlight [schedule]="item" class="timing">
+                      <li>
+                        <a *ngFor="let item of scheduleTimeModel.Friday"
+                           appHighlight [schedule]="item" class="timing">
                           <span>{{item.atBegin | myTimePipe}}</span> <span>AM</span>
                         </a>
                       </li>
-                      <li *ngFor="let item of scheduleTimeModel.Sat">
-                        <a appHighlight [schedule]="item" class="timing">
+                      <li>
+                        <a *ngFor="let item of scheduleTimeModel.Sat"
+                           appHighlight [schedule]="item" class="timing">
                           <span>{{item.atBegin | myTimePipe}}</span> <span>AM</span>
                         </a>
                       </li>

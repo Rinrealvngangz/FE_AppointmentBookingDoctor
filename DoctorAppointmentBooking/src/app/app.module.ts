@@ -55,6 +55,9 @@ import { SidebarPatientComponent } from './components/patient/sidebar-patient/si
 import { ChangepasswordComponent } from './components/patient/changepassword/changepassword.component';
 import {HightlightColorDirective} from "./directives/hightlightColor.directive";
 import { CheckoutPatientComponent } from './components/checkout-patient/checkout-patient.component';
+import {AppointmentService} from "./services/appointment.service";
+import { AppointmentPatientComponent } from './components/appointment/appointment-patient/appointment-patient.component';
+import { BookingSuccessComponent } from './components/booking/booking-success/booking-success.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,7 +85,9 @@ import { CheckoutPatientComponent } from './components/checkout-patient/checkout
     DashboardPatientComponent,
     SidebarPatientComponent,
     ChangepasswordComponent,
-    CheckoutPatientComponent
+    CheckoutPatientComponent,
+    AppointmentPatientComponent,
+    BookingSuccessComponent
   ],
     imports: [
         BrowserModule,
@@ -119,6 +124,7 @@ import { CheckoutPatientComponent } from './components/checkout-patient/checkout
     AuthDashBoardGuardService,
     BreadCrumbsService,
     PatientService,
+    AppointmentService,
     {
       provide: APP_BASE_HREF,
       useValue:'/'
