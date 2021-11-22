@@ -29,6 +29,7 @@ import {MyTimePipe} from "../../common/my-time-pipe";
 import { AddScheduleTimingsComponent } from './schedule-timings/add-schedule-timings/add-schedule-timings.component';
 import { BeginEndTimingsComponent } from './schedule-timings/begin-end-timings/begin-end-timings.component';
 import { UpdateScheduleTimingsComponent } from './schedule-timings/update-schedule-timings/update-schedule-timings.component';
+import { AppointmentComponent } from './appointment/appointment.component';
 
 const routes: Routes =[
 
@@ -58,6 +59,7 @@ const routes: Routes =[
             data:{breadcrumb:"list doctor"},
             resolve:{Doctors:DoctorListResolver}
           }
+
         ],
       },
       {
@@ -67,6 +69,13 @@ const routes: Routes =[
         },
         canActivateChild:[AuthDashBoardGuardService]
       },
+       {
+         path:'appointment',component:AppointmentComponent,
+         data:{
+           breadcrumb:"appointment"
+         },
+         canActivateChild:[AuthDashBoardGuardService]
+       },
        {
          path:'scheduleTimings',component:ScheduleTimingsComponent,
          data:{
@@ -128,7 +137,8 @@ const routes: Routes =[
     MyTimePipe,
     AddScheduleTimingsComponent,
     BeginEndTimingsComponent,
-    UpdateScheduleTimingsComponent
+    UpdateScheduleTimingsComponent,
+    AppointmentComponent
   ],
   imports: [
     CommonModule,
@@ -154,7 +164,8 @@ const routes: Routes =[
     PasswordDirective,
     AddAdminComponent,
     ScheduleTimingsComponent,
-    UpdateScheduleTimingsComponent
+    UpdateScheduleTimingsComponent,
+    AppointmentComponent
   ],
 })
 export class AdminsModule { }

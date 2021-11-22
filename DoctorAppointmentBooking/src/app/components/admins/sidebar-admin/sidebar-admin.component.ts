@@ -9,10 +9,15 @@ import {AuthService} from "../../../services/auth.service";
 })
 export class SidebarAdminComponent implements OnInit {
   authAdmin:unknown;
+  id:any
   constructor(private authenService:AuthService) { }
 
   ngOnInit(): void {
     this.authAdmin =this.authenService.getNameRole();
+    this.getId();
   }
+  getId(){
+   this.id =  this.authenService.getId();
 
+  }
 }

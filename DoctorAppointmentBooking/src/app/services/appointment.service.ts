@@ -5,6 +5,7 @@ import {IMessage} from "../interface/Imessage.model";
 import {AppointmentPatientModel} from "../interface/IAppointment/AppointmentPatient.model";
 import {AppointmentPatientModels} from "../interface/IAppointment/AppointmentPatientModels.model";
 import {map} from "rxjs/operators";
+import {AppointmentDoctorsModel} from "../interface/IAppointment/AppointmentDoctors.model";
 
 const PATH = "assets/img/doctors/";
 
@@ -17,6 +18,10 @@ export class AppointmentService{
     }
     getAppointmentByPatientId(id:any):Observable<AppointmentPatientModels>{
     return this.http.get<AppointmentPatientModels>(`api/v1/appointments-patient/${id}`);
+    }
+
+    getAppointmentByDoctorId(id:any):Observable<AppointmentDoctorsModel>{
+      return this.http.get<AppointmentDoctorsModel>(`api/v1/appointments-doctor/${id}`);
     }
 
     listViewAppointment(data:AppointmentPatientModels){
@@ -38,7 +43,11 @@ export class AppointmentService{
       return dataAppointmentPatient;
     }
 
+
+
     deleteAppointment(id:any):Observable<IMessage>{
        return this.http.delete<IMessage>(`api/v1/appointment/${id}`)
     }
+
+
 }

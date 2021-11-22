@@ -1,0 +1,83 @@
+<app-admin [namePage]="namePage" [nameComponent]="nameComponent">
+  <div compo>
+    <ngx-datatable
+      #mydatatable
+      [ngClass]="tablestyles"
+      [columnMode]="ColumnMode.force"
+      [limit]="5"
+      [footerHeight]="50"
+      [headerHeight]="50"
+      rowHeight="auto"
+      [rows]="rows">
+
+      <ngx-datatable-column name="fullName">
+        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+        <span
+          title="Double click to edit"
+          (dblclick)="editing[rowIndex + '-fullName'] = true"
+          *ngIf="!editing[rowIndex + '-fullName']"
+        >
+               {{ value }}
+        </span>
+          <input
+            autofocus
+            (blur)="updateValue($event, 'fullName', rowIndex)"
+            *ngIf="editing[rowIndex + '-fullName']"
+            type="text"
+            [value]="value"
+          />
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="email">
+        <ng-template ngx-datatable-cell-template let-value="value">
+          {{ value }}
+        </ng-template>
+
+      </ngx-datatable-column>
+      <ngx-datatable-column name="phone">
+        <ng-template ngx-datatable-cell-template let-value="value">
+          {{ value }}
+        </ng-template>
+
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="bookDate">
+        <ng-template ngx-datatable-cell-template let-value="value">
+          {{ value |date:"mediumDate" }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="atBegin">
+        <ng-template ngx-datatable-cell-template let-value="value">
+          {{ value | myTimePipe}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="atEnd">
+        <ng-template ngx-datatable-cell-template let-value="value">
+          {{ value |myTimePipe }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column>
+        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex">
+          <ng-container *ngIf="rows[rowIndex].status === 0 ; else removeAccept">
+            <a  data-toggle="modal"  (click)="saveStatus(rows[rowIndex].appointmentId)"
+                class="btn btn-sm bg-success-light">
+                Chấp nhận
+            </a>
+          </ng-container>
+          <ng-template #removeAccept>
+            <a  data-toggle="modal" (click)="removeAppointment(rows[rowIndex].appointmentId)" class="btn btn-sm bg-danger-light">
+              <i class="fe fe-trash"></i>Hủy
+            </a>
+          </ng-template>
+
+        </ng-template>
+      </ngx-datatable-column>
+
+
+
+    </ngx-datatable>
+  </div>
+</app-admin>

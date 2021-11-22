@@ -13,6 +13,8 @@ import {AppointmentService} from "../../services/appointment.service";
   templateUrl: './checkout-patient.component.html',
   styleUrls: ['./checkout-patient.component.css']
 })
+
+
 export class CheckoutPatientComponent implements OnInit {
   firstName:string ='';
   lastName:string ='';
