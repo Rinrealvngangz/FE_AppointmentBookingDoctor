@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { IdoctorPopular } from "../components/home/popular/doctorPopular.model";
-import { HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import { from, Observable, of, Subject } from "rxjs";
 import {map} from 'rxjs/operators'
 import { ICreateDoctor,IDoctor ,IDoctorProfile } from "../interface/Idoctor/index";
@@ -10,17 +10,18 @@ import * as moment from "moment";
 const LOCATION = "Đà Lạt, Việt Nam";
 const PATH = "assets/img/doctors/";
 
-const POPULAR_DOCTOR:IdoctorPopular[] = [];
+
 
 @Injectable()
 export class DoctorPopularService{
     constructor(private http:HttpClient){}
 
     viewPopularDoctor(data:IDoctor):IdoctorPopular[]{
+      const POPULAR_DOCTOR:IdoctorPopular[] = [];
         if(data.doctors.length>0){
             const doctors =data.doctors;
               let i =1;
-              doctors.slice(0,10).forEach(el => {
+              doctors.forEach(el => {
 
                   const doctor:IdoctorPopular = {
                    id : el.doctorId,
@@ -98,13 +99,21 @@ export class DoctorPopularService{
                         })
                       )
     }
-
     removeDoctor(id:any):Observable<IMessage>{
         return this.http.delete<IMessage>(`api/v1/doctor/${id}`);
     }
 
     updatePass(id:any,passwordUpdate:any):Observable<IMessage>{
-      return this,this.http.put<IMessage>(`api/v1/doctor/update-password/${id}`,passwordUpdate);
+      return this.http.put<IMessage>(`api/v1/doctor/update-password/${id}`,passwordUpdate);
+    }
+
+    filterDoctor(sort:string,fields:string,limit:string):Observable<IDoctor>{
+      let params;
+      params =new HttpParams().set('fields_speciallity', fields)
+                              .set('sort', sort)
+                              .set('fieldsLimit', limit)
+      console.log(params)
+      return this.http.get<IDoctor>(`api/v1/doctors`,{params:params});
     }
 }
 

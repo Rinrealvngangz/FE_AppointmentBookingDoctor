@@ -53,9 +53,8 @@ export const appRoutesHome:Routes = [
         ]
       },
       {
-        path:'doctor-profile',component:DoctorDetailComponent
+        path:'doctor-profile',component:DoctorComponent
       },
-
       {
         path:'doctor-profile/:id',component:DoctorDetailComponent
       },
