@@ -58,6 +58,7 @@ import { CheckoutPatientComponent } from './components/checkout-patient/checkout
 import {AppointmentService} from "./services/appointment.service";
 import { AppointmentPatientComponent } from './components/appointment/appointment-patient/appointment-patient.component';
 import { BookingSuccessComponent } from './components/booking/booking-success/booking-success.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 @NgModule({
   declarations: [
     AppComponent,
@@ -98,6 +99,7 @@ import { BookingSuccessComponent } from './components/booking/booking-success/bo
         HttpClientModule,
         AdminsModule,
         NgxSpinnerModule,
+      NgxPaginationModule,
         ToastrModule.forRoot({
             timeOut: 2000,
             positionClass: 'toast-top-right',

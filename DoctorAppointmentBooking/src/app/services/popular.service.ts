@@ -112,9 +112,17 @@ export class DoctorPopularService{
       params =new HttpParams().set('fields_speciallity', fields)
                               .set('sort', sort)
                               .set('fieldsLimit', limit)
-      console.log(params)
+
       return this.http.get<IDoctor>(`api/v1/doctors`,{params:params});
     }
+
+  paginationsDoctor(offset:number,limit:number,sort:string,fields:string):Observable<IDoctor>{
+    let params;
+    params =new HttpParams().set('offset', offset).set('limit', limit)
+                            .set('fields_speciallity', fields)
+                            .set('sort', sort)
+    return this.http.get<IDoctor>(`api/v1/doctors`,{params:params});
+  }
 }
 
 

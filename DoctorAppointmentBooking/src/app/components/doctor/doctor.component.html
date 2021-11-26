@@ -19,7 +19,8 @@
               </div>
               <div class="filter-widget">
                 <h4>Select Specialist</h4>
-                <div *ngFor="let item of specialities">
+                <div *ngFor="let item of specialities |
+                paginate: { itemsPerPage: limitPage, currentPage: page,totalItems:total }">
                   <label class="custom_check">
                     <input type="checkbox" [value]="item.speciallityName"
                            (change)="onItemChange(
@@ -134,8 +135,6 @@
               </div>
             </div>
           </div>
-          <!-- /Search Filter -->
-
         </div>
 
         <div class="col-md-12 col-lg-8 col-xl-9">
@@ -146,8 +145,11 @@
                                  [nameDoctor]="item.name" [speciality]="item.specialitiesName"></app-doctor-file>
           </ng-container>
 
-          <div class="load-more text-center">
-            <a class="btn btn-primary btn-sm" href="javascript:void(0);">Load More</a>
+          <div class="pagination">
+            <ng-container *ngIf="limitPage>=5">
+              <pagination-controls (pageChange)="getPages($event)"></pagination-controls>
+            </ng-container>
+
           </div>
         </div>
       </div>
