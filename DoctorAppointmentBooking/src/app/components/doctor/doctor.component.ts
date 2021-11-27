@@ -2,12 +2,13 @@ import {Component, OnInit, Input, Output, ViewChild, ChangeDetectorRef} from '@a
 import {IdoctorPopular} from "../home/popular/doctorPopular.model";
 import {DoctorPopularService} from "../../services/popular.service";
 import {ActivatedRoute} from "@angular/router";
-import {map, switchMap, tap} from "rxjs/operators";
+import {concatMap, debounceTime, map, startWith, switchMap, tap, toArray} from "rxjs/operators";
 import {SpecialitiesService} from "../../services/specialities.service";
 import {ISpecialities} from "../home/specialities/specialities.model";
 import {ISpeciality} from "../../interface/ISpecialities";
 import {global} from "@angular/compiler/src/util";
 import {createLogErrorHandler} from "@angular/compiler-cli/ngcc/src/execution/tasks/completion";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-doctor',
@@ -15,6 +16,8 @@ import {createLogErrorHandler} from "@angular/compiler-cli/ngcc/src/execution/ta
   styleUrls: ['./doctor.component.css']
 })
 export class DoctorComponent implements OnInit {
+  formquery!: FormGroup
+  queryControl:FormControl
   limitPage:number=5;
   page:number =1;
   total:number
@@ -30,16 +33,30 @@ export class DoctorComponent implements OnInit {
               private cdr:ChangeDetectorRef) { }
 
   ngOnInit(): void {
+     this.queryControl =new FormControl("")
+      this.formquery = new FormGroup({
+        queryDoctor:this.queryControl
+      })
     this.limitPage =parseInt(this.limit)
     this.speciality.getSpecialties().pipe(
       map(data => this.speciality.viewSpecialties(data.specialities))
     ).subscribe(rs => this.specialities =rs );
     this.paginationDoctor(this.page);
 
+     // @ts-ignore
+    this.formquery.get("queryDoctor").valueChanges.pipe(
+       debounceTime(500),
+       switchMap(query => this.doctor.searchDoctor(query,this.name,this.specialityField,this.limit).pipe(
+         tap(val => this.limitPage = val.doctors.length-1),
+         map(data => this.doctor.viewPopularDoctor(data))
+       ))
+     ).subscribe(data => this.doctorPopular = [...data])
   }
+
   onItemChange(value:any){
-    console.log(this.specialityField)
-    this.doctor.filterDoctor(this.name,this.specialityField,this.limit).pipe(
+    let search = this.formquery.get("queryDoctor")?.value;
+    this.doctor.searchDoctor(search,this.name,this.specialityField,this.limit).pipe(
+      tap(val => console.log(val)),
       tap(val => this.limitPage = val.doctors.length-1),
       map(data =>this.doctor.viewPopularDoctor(data)),
     ).subscribe(data =>
@@ -54,8 +71,9 @@ export class DoctorComponent implements OnInit {
   }
 
   paginationDoctor(p:number){
+    let search = this.formquery.get("queryDoctor")?.value;
     let offset = (p -1) * this.limitPage;
-    this.doctor.paginationsDoctor(offset,this.limitPage,this.name,this.specialityField).pipe(
+    this.doctor.paginationsDoctor(search,offset,this.limitPage,this.name,this.specialityField).pipe(
       tap(val =>this.total = val.total),
       map(data => this.doctor.viewPopularDoctor(data))
     ).subscribe(data=>{

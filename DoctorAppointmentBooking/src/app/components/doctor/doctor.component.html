@@ -14,7 +14,10 @@
             <div class="card-body">
               <div class="filter-widget">
                 <div class="cal-icon">
-                  <input type="text" class="form-control datetimepicker" placeholder="Select doctor">
+                  <form [formGroup]="formquery">
+                    <input type="text" formControlName="queryDoctor" class="form-control datetimepicker" placeholder="Select doctor">
+                  </form>
+
                 </div>
               </div>
               <div class="filter-widget">

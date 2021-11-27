@@ -15,6 +15,7 @@ import {BreadCrumbBarComponent} from "../bread-crumb-bar/bread-crumb-bar.compone
 import {IBreadCrumb} from "../bread-crumb-bar/bread-crumb.model";
 import {Event as NavigationEvent, NavigationStart, Router} from "@angular/router";
 import {BreadCrumbsService} from "../../services/breadCrumb.service";
+import {FormControl} from "@angular/forms";
 
 interface album{
   src: string,

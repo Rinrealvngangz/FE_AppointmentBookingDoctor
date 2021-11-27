@@ -116,11 +116,22 @@ export class DoctorPopularService{
       return this.http.get<IDoctor>(`api/v1/doctors`,{params:params});
     }
 
-  paginationsDoctor(offset:number,limit:number,sort:string,fields:string):Observable<IDoctor>{
+  paginationsDoctor(search:string,offset:number,limit:number,sort:string,fields:string):Observable<IDoctor>{
     let params;
-    params =new HttpParams().set('offset', offset).set('limit', limit)
+    params =new HttpParams().set('name', search)
+                            .set('offset', offset)
+                            .set('limit', limit)
                             .set('fields_speciallity', fields)
                             .set('sort', sort)
+    return this.http.get<IDoctor>(`api/v1/doctors`,{params:params});
+  }
+
+  searchDoctor(search:string,sort:string,fields:string,limit:string):Observable<IDoctor>{
+    let params;
+    params =new HttpParams().set('name', search)
+                            .set('fields_speciallity', fields)
+                            .set('sort', sort)
+                            .set('fieldsLimit', limit)
     return this.http.get<IDoctor>(`api/v1/doctors`,{params:params});
   }
 }
