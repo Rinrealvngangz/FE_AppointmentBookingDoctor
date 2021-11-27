@@ -11,9 +11,20 @@ export class ErrorInterceptor implements HttpInterceptor{
                         return next.handle(req).pipe(
                          catchError((err):Observable<any>=>{
                            if(err instanceof HttpErrorResponse){
-                            const error =err.error;
+                             let error ={};
+                             console.log(err.status)
+                               if(err.status.toString().startsWith('5')){
+                                 // @ts-ignore
+                                 error.status = 'fail';
+                                   // @ts-ignore
+                                   error.message = 'Không thể kết nối tới server'
+                               }else{
+                                 error =err.error;
+                               }
                             const message:IMessage ={
+                              // @ts-ignore
                                status:error.status,
+                              // @ts-ignore
                                message:error.message
                              }
                              this.toash.error(message.message,message.status)
